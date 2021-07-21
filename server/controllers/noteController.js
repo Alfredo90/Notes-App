@@ -1,4 +1,5 @@
-const dummyData = [
+let id = 6
+const notesData = [
     {
         id: 1,
         title: "Notes App",
@@ -43,4 +44,16 @@ const dummyData = [
     },
 ]
 
-export default dummyData
+
+module.exports = {
+    getNotes: (req, res) => {
+        res.status(200).send(notesData)
+    },
+    addNote: (req, res) => {
+        id++
+        req.body.id = id
+        notesData.push(req.body)
+
+        res.status(200).send(notesData)
+    }
+}

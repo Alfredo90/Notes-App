@@ -6,7 +6,7 @@ const Note = ({noteDetails: {title, body, dateLastModified, dateCreated}}) => {
         <div>
             <h2>{title}</h2>
             <p>{body}</p>
-            <time dateTime={lastModifiedFormatted}>{lastModifiedFormatted}</time>
+            <time dateTime={dateLastModified}>{lastModifiedFormatted}</time>
         </div>
     )
 }
