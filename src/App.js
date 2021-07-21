@@ -4,11 +4,11 @@ import { SearchBar } from './components/SearchBar.js/SearchBar';
 function App() {
   return (
     <div className="App">
-      {/* <SearchBar/> */}
-      {/* <Notes/> */}
+      <SearchBar/>
+      <Notes/>
       <AddNote/>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
