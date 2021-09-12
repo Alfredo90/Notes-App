@@ -24,12 +24,11 @@ const AddNote = () => {
                     type='text'  
                     placeholder='Title...'
                 />
-                <br/>
                 <textarea
                     value={textarea}
                     onChange={handleInput}
-                    placeholder='Type text ...'>
-                </textarea>
+                    placeholder='Type text ...'
+                />
                 <button type='button' className="save">Save</button>
             </form>
         </div>
