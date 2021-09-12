@@ -1,13 +1,14 @@
 import AddNote from '../AddNote.js/AddNote'
+import Notes from "../Notes/Notes"
+import { Switch, Route } from 'react-router'
 
-// import Notes from "../Notes/Notes"
 
 const App = () => {
   return (
-    <div>
-      {/* <Notes/> */}
-      <AddNote/>
-    </div>
+  <Switch>
+    <Route exact path="/"> <Notes/> </Route>
+    <Route path="/addNote"> <AddNote/> </Route>
+  </Switch>
   )
 }
 

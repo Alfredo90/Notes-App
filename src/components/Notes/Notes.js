@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import Note from './Note/Note'
+import { Link } from 'react-router-dom'
 
 const Notes = () => {
   const [notes, setNotes] = useState([])
@@ -41,6 +42,7 @@ const Notes = () => {
         />
         <div>{notesMapped}</div>
       </label>
+      <Link to="/addnote">+</Link>
     </div>
   )
 }

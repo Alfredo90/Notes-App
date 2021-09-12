@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
+
 const AddNote = () => {
   const [title, setTitle] = useState('')
   const [body, setBody] = useState('')
-  const [isOnAddingNote, setIsOnAddingNote] = useState(false)
 
   const handleChange = e => {
     e.target.localName === 'input'
@@ -22,11 +22,7 @@ const AddNote = () => {
       .catch(err => console.error(err))
   }
 
-  const addButtonClick = () => {
-    setIsOnAddingNote(true)
-  }
-
-  return isOnAddingNote ? (
+  return (
     <form onSubmit={submitForm}>
       <input
         value={title}
@@ -40,14 +36,12 @@ const AddNote = () => {
         onChange={handleChange}
         placeholder="Type text ..."
       />
-      <button type="submit" className="save">
-        Save
-      </button>
+      <Link to="/">
+        <button type="submit" className="save">
+          Save
+        </button>
+      </Link>
     </form>
-  ) : (
-    <Link to="/addnote">
-      <button type="button" onClick={addButtonClick}>+</button>
-    </Link>
   )
 }
 
