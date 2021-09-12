@@ -1,39 +1,54 @@
 import React, { useState } from 'react'
-// import { AiFillCheckCircle } from 'react-icons/ai'
+import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 const AddNote = () => {
-    const [ textarea, setTextarea ] = useState('')
-    const [input, setInput] = useState ('')
+  const [title, setTitle] = useState('')
+  const [body, setBody] = useState('')
+  const [isOnAddingNote, setIsOnAddingNote] = useState(false)
 
-    const handleInput = (e) => {
-        e.target.localName === "input" ? setInput(e.target.value) : setTextarea(e.target.value)
-        console.log(e.target.localName)
-    }
+  const handleChange = e => {
+    e.target.localName === 'input'
+      ? setTitle(e.target.value)
+      : setBody(e.target.value)
+    console.log(e.target.localName)
+  }
 
-    const submit = (e) =>{
-       e.preventDefault() 
-    }
-      
-    
-    return (
-        <div className='new-note'>
-            <form onSubmit={submit}>
-                <input
-                    value={input}
-                    onChange={handleInput}
-                    type='text'  
-                    placeholder='Title...'
-                />
-                <br/>
-                <textarea
-                    value={textarea}
-                    onChange={handleInput}
-                    placeholder='Type text ...'>
-                </textarea>
-                <button type='button' className="save">Save</button>
-            </form>
-        </div>
-    )
+  const submitForm = async e => {
+    e.preventDefault()
+    const dateCreated = new Date()
+    await axios
+      .post('/api/notes', { title, body, dateCreated })
+      .catch(err => console.error(err))
+  }
+
+  const addButtonClick = () => {
+    setIsOnAddingNote(true)
+  }
+
+  return isOnAddingNote ? (
+    <form onSubmit={submitForm}>
+      <input
+        value={title}
+        onChange={handleChange}
+        type="text"
+        placeholder="Title..."
+      />
+      <br />
+      <textarea
+        value={body}
+        onChange={handleChange}
+        placeholder="Type text ..."
+      />
+      <button type="submit" className="save">
+        Save
+      </button>
+    </form>
+  ) : (
+    <Link to="/addnote">
+      <button type="button" onClick={addButtonClick}>+</button>
+    </Link>
+  )
 }
 
 export default AddNote
