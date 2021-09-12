@@ -1,12 +1,12 @@
 import Notes from '../Notes/Notes'
+import { Switch, Route } from 'react-router-dom'
+import AddNote from '../AddNote.js/AddNote'
 
-const App = () => {
-
-  return (
-    <div className="font-proxima-nova bg-blurry-shapes bg-local bg-cover bg-white w-100vw h-100vh">
-      <Notes />
-    </div>
-  )
-}
+const App = () => (
+  <Switch>
+    <Route exact path="/"> <Notes /> </Route>
+    <Route path="/addNote"> <AddNote /> </Route>
+  </Switch>
+)
 
 export default App

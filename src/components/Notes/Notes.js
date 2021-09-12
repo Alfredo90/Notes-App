@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import Note from './Note/Note'
+import { Link } from 'react-router-dom'
 
 const Notes = () => {
   const [notes, setNotes] = useState([])
@@ -22,15 +23,9 @@ const Notes = () => {
       : true
   })
 
-  const notesMapped = filteredNotes.map(noteDetails => (
-    <Note key={noteDetails.id} noteDetails={noteDetails} />
-  ))
-
-  const test = notesMapped.length < 1 ? <p>No results found</p> : notesMapped
-
   return (
-    <div>
-      <label htmlFor="search-bar" className="hidden">
+    <div className="font-proxima-nova bg-blurry-shapes bg-local bg-cover bg-white w-100vw h-100vh">
+      <label htmlFor="search-bar" className="hidden" aria-label="hidden">
         Search Bar
       </label>
       <input
@@ -41,8 +36,15 @@ const Notes = () => {
         placeholder="Search"
       />
       <div className="m-40 p-16 rounded-20 border border-white border-opacity-25 bg-gradient-to-tl from-test2 to-test flex flex-col backdrop-filter backdrop-blur-md">
-        {test}
+        {filteredNotes.length < 1 ? (
+          <p>No results found</p>
+        ) : (
+          filteredNotes.map(noteDetails => (
+            <Note key={noteDetails.id} noteDetails={noteDetails} />
+          ))
+        )}
       </div>
+      <Link to="/addNote">+</Link>
     </div>
   )
 }
