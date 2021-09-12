@@ -1,5 +1,5 @@
-import Notes from '../Notes/Notes'
 import { Switch, Route } from 'react-router-dom'
+import Notes from '../Notes/Notes'
 import AddNote from '../AddNote.js/AddNote'
 
 const App = () => (

@@ -1,29 +1,48 @@
 import React, { useState } from 'react'
-// import { AiFillCheckCircle } from 'react-icons/ai'
+import axios from 'axios'
+import { useHistory } from 'react-router-dom'
+
 
 const AddNote = () => {
-  const [textarea, setTextarea] = useState('')
-  const [input, setInput] = useState('')
+  const [title, setTitle] = useState('')
+  const [body, setBody] = useState('')
+  const history = useHistory()
 
-  const handleInput = e => {
-    e.target.localName === 'input' ? setInput(e.target.value) : setTextarea(e.target.value)
-    console.log(e.target.localName)
+  const handleChange = e => {
+    e.target.localName === 'input'
+      ? setTitle(e.target.value)
+      : setBody(e.target.value)
   }
 
-  const submit = e => {
+  const submitForm = e => {
     e.preventDefault()
+    const dateCreated = new Date()
+    axios
+      .post('/api/notes', { title, body, dateCreated })
+      .then(() => {
+        history.push('/')
+      })
+      .catch(err => console.error(err))
   }
 
   return (
-    <div className="new-note">
-      <form onSubmit={submit}>
-        <input type="text" placeholder="Title..." value={input} onChange={handleInput}  />
-        <textarea placeholder="Type text ..." value={textarea} onChange={handleInput} />
-        <button type="button">
-          Save
-        </button>
-      </form>
-    </div>
+    <form onSubmit={submitForm}>
+      <input
+        value={title}
+        onChange={handleChange}
+        type="text"
+        placeholder="Title..."
+      />
+      <br />
+      <textarea
+        value={body}
+        onChange={handleChange}
+        placeholder="Type text ..."
+      />
+      <button type="submit" className="save">
+        Save
+      </button>
+    </form>
   )
 }
 
