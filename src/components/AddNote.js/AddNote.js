@@ -1,24 +1,27 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 
 const AddNote = () => {
   const [title, setTitle] = useState('')
   const [body, setBody] = useState('')
+  const history = useHistory()
 
   const handleChange = e => {
     e.target.localName === 'input'
       ? setTitle(e.target.value)
       : setBody(e.target.value)
-    console.log(e.target.localName)
   }
 
-  const submitForm = async e => {
+  const submitForm = e => {
     e.preventDefault()
     const dateCreated = new Date()
-    await axios
+    axios
       .post('/api/notes', { title, body, dateCreated })
+      .then(() => {
+        history.push('/')
+      })
       .catch(err => console.error(err))
   }
 
@@ -36,11 +39,9 @@ const AddNote = () => {
         onChange={handleChange}
         placeholder="Type text ..."
       />
-      <Link to="/">
-        <button type="submit" className="save">
-          Save
-        </button>
-      </Link>
+      <button type="submit" className="save">
+        Save
+      </button>
     </form>
   )
 }

@@ -5,44 +5,46 @@ import { Link } from 'react-router-dom'
 
 const Notes = () => {
   const [notes, setNotes] = useState([])
-  const [searchTerm, setSearchTerm] = useState('')
+  const [search, setSearch] = useState('')
 
   useEffect(() => {
-    axios
-      .get('/api/notes')
+    axios.get('/api/notes')
       .then(({ data: notes }) => setNotes(notes))
       .catch(err => console.error(err))
   }, [])
 
-  const handleChange = e => {
-    setSearchTerm(e.target.value)
-  }
+  const searchHandler = e => setSearch(e.target.value)
 
   const filteredNotes = notes.filter(({ title, body }) => {
-    const fixedSearch = searchTerm.toLowerCase()
+    const fixedSearch = search.toLowerCase()
 
-    return searchTerm !== ''
-      ? title.toLowerCase().includes(fixedSearch) ||
-          body.toLowerCase().includes(fixedSearch)
+    return search !== ''
+      ? title.toLowerCase().includes(fixedSearch) || body.toLowerCase().includes(fixedSearch)
       : true
   })
 
-  const notesMapped = filteredNotes.map(noteDetails => (
-    <Note key={noteDetails.id} noteDetails={noteDetails} />
-  ))
-
   return (
-    <div>
-      <label>
-        <input
-          type="search"
-          placeholder="Search..."
-          value={searchTerm}
-          onChange={handleChange}
-        />
-        <div>{notesMapped}</div>
+    <div className="font-proxima-nova bg-blurry-shapes bg-local bg-cover bg-white w-100vw h-100vh">
+      <label htmlFor="search-bar" className="hidden" aria-label="hidden">
+        Search Bar
       </label>
-      <Link to="/addnote">+</Link>
+      <input
+        id="search-bar"
+        type="search"
+        value={search}
+        onChange={searchHandler}
+        placeholder="Search"
+      />
+      <div className="m-40 p-16 rounded-20 border border-white border-opacity-25 bg-gradient-to-tl from-test2 to-test flex flex-col backdrop-filter backdrop-blur-md">
+        {filteredNotes.length < 1 ? (
+          <p>No results found</p>
+        ) : (
+          filteredNotes.map(noteDetails => (
+            <Note key={noteDetails.id} noteDetails={noteDetails} />
+          ))
+        )}
+      </div>
+      <Link to="/addNote">+</Link>
     </div>
   )
 }
