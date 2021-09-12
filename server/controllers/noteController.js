@@ -51,6 +51,9 @@ module.exports = {
   addNote: (req, res) => {
     id++
     req.body.id = id
+    console.log(req.body)
+    console.log(req)
+    req.body.dateLastModified = req.body.dateCreated
     notesData.push(req.body)
 
     res.status(200).send(notesData)
