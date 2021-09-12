@@ -1,13 +1,14 @@
-import Notes from "../Notes.js/Notes"
-import SearchBar from "../SearchBar.js/SearchBar"
+import AddNote from '../AddNote.js/AddNote'
+
+// import Notes from "../Notes/Notes"
 
 const App = () => {
-    return (
-      <div>
-        <SearchBar />
-        <Notes />
-      </div>
-    )
-  }
-  
-  export default App
+  return (
+    <div>
+      {/* <Notes/> */}
+      <AddNote/>
+    </div>
+  )
+}
+
+export default App
