@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import Note from './Note/Note'
 import { Link } from 'react-router-dom'
+import {ReactComponent as AddIcon} from '../../assets/images/addIcon.svg'
 
 const Notes = () => {
   const [notes, setNotes] = useState([])
@@ -44,7 +45,7 @@ const Notes = () => {
           ))
         )}
       </div>
-      <Link to="/addNote">+</Link>
+      <Link to="/addNote"><AddIcon/></Link>
     </div>
   )
 }
