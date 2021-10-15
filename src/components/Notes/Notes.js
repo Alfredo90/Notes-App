@@ -31,18 +31,33 @@ const Notes = () => {
       <label htmlFor="search-bar" className="hidden " aria-label="hidden">
         Search Bar
       </label>
-      <div className="flex items-center justify-center">
-        <input
-          id="search-bar"
-          type="search"
-          value={search}
-          onChange={searchHandler}
-          placeholder="Search..."
-        />
-        <button class="flex items-center justify-center px-4 border-none bg-white h-24">
-           <SearchIcon className="h-14 w-14"/>
-        </button>
-      </div>
+      {search === '' ? (
+        <div className="flex items-center justify-center ">
+          <input
+            id="search-bar"
+            type="search"
+            value={search}
+            onChange={searchHandler}
+            placeholder="Search..."
+            className="outline-none"
+          />
+          <button class="flex items-center justify-center px-4 border-none bg-white h-24">
+            <SearchIcon className="h-14 w-14" />
+          </button>
+        </div>
+      ) : (
+        <div className="flex items-center justify-center ">
+          <input
+            id="search-bar"
+            type="search"
+            value={search}
+            onChange={searchHandler}
+            placeholder="Search..."
+            className="outline-none"
+          />
+        </div>
+      )}
+
       <div className="m-40 p-16 rounded-20 border border-white border-opacity-25 bg-gradient-to-tl from-test2 to-test flex flex-col backdrop-filter backdrop-blur-md">
         {filteredNotes.length < 1 ? (
           <p>No results found</p>
